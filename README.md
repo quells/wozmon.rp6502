@@ -8,7 +8,7 @@ Ported to the RP6502 (v0.2) by Kai Wells in 2023.
 
 Compiles to just 252 bytes of machine code, but requires an additional 128 bytes of input buffer and 8 zero page spaces.
 
-Occupies `0x24..0x2B` and `0xFD00..0xFE79` when loaded. Works best with `set caps 2` to force capslock - hexadecimal and `R` must be capitalized.
+Occupies `0x24..0x2B` and `0xFD00..0xFE7F` when loaded. Works best with `set caps 2` to force capslock - hexadecimal and `R` must be capitalized.
 
 ## Install
 
