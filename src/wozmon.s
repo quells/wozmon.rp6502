@@ -45,9 +45,8 @@ BACKSPACE:      DEY                    ; Back up text index.
                 BMI     GETLINE        ; Beyond start of line, reinitialize.
 
 NEXTCHAR:
-                LDA     RIA_READY      ; Load RIA ready flags.
-                AND     #$40           ; Isolate RX flag.
-                BEQ     NEXTCHAR       ; Wait until character on RX.
+                BIT     RIA_READY      ; Bit test RIA ready flags. B6=1 indicates readiness.
+                BVC     NEXTCHAR       ; Wait until character on RX.
                 LDA     RIA_RX         ; Read character from RX.
                 STA     IN,Y           ; Add to text buffer.
                 JSR     ECHO           ; Display character.
@@ -183,9 +182,8 @@ PRHEX:
 ECHO:
                 PHA                    ; Save A.
 ECHO_WAIT:
-                LDA     RIA_READY      ; Load RIA ready flags.
-                AND     #$80           ; Isolate TX flag.
-                BEQ     ECHO_WAIT      ; Wait until RIA is ready to receive.
+                BIT     RIA_READY      ; Bit test RIA ready flags. B7=1 indicates readiness.
+                BPL     ECHO_WAIT      ; Wait until RIA is ready to receive.
                 PLA                    ; Restore A.
                 STA     RIA_TX         ; Send A.
                 RTS                    ; Return.
